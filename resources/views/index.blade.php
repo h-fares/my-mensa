@@ -8,7 +8,7 @@
 </head>
 <body>
 <div id="app">
-    <example-component></example-component>
+    <index></index>
 </div>
 
 <script src="{{ asset('js/app.js') }}" defer></script>
