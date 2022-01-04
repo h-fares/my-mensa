@@ -12,6 +12,6 @@ const apiUser = axios.create({
 
 export default {
     getUser() {
-        return apiUser.get("/user-profile");
+        return apiUser.get("/user");
     }
 };

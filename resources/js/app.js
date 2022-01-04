@@ -2,6 +2,8 @@ require('./bootstrap');
 import Vue from 'vue'
 import router from './route/router'
 import Index from './Index'
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
@@ -15,7 +17,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
-
+Vue.use(VueAxios, axios)
 
 
 Vue.component('index', Index);
