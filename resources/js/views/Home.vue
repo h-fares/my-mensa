@@ -1,6 +1,6 @@
 <template>
     <div>
-
+        <nav-bar></nav-bar>
         <b-button @click="getUser" variant="primary">get user</b-button>
         {{openMensa}}
         <b-alert variant="success" v-if="user">{{user.name}}</b-alert>
@@ -10,8 +10,10 @@
 <script>
 import userService from "../service/userService";
 import mensaService from "../service/mensaService";
+import NavBar from "../components/NavBar";
 export default {
     name: "Home",
+    components: {NavBar},
     methods: {
         getUser() {
             userService.getUser().then(response => {

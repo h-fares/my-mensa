@@ -5,18 +5,10 @@ Vue.use(VueRouter);
 
 import Home from "../views/Home";
 import Login from "../views/Login";
+import Mensa from "../views/Mensa";
+import LikedMensa from "../views/LikedMensa";
 
 const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: Home,
-        props:true,
-        meta: {
-            allow: true,
-            title: 'Home',
-        }
-    },
     {
         path: '/login',
         name: 'Login',
@@ -25,6 +17,36 @@ const routes = [
         meta: {
             allow: true,
             title: 'Login',
+        }
+    },
+    {
+        path: '/home',
+        name: 'Home',
+        component: Home,
+        props:true,
+        meta: {
+            allow: true,
+            title: 'Home',
+        }
+    },
+    {
+        path: '/mensa',
+        name: 'Mensa',
+        component: Mensa,
+        props:true,
+        meta: {
+            allow: true,
+            title: 'Home',
+        }
+    },
+    {
+        path: '/likedMensa',
+        name: 'LikedMensa',
+        component: LikedMensa,
+        props:true,
+        meta: {
+            allow: true,
+            title: 'Home',
         }
     }
 ]
