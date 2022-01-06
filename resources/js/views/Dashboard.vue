@@ -1,12 +1,12 @@
 <template>
 <div>
-    Liked
+    Dashboard
 </div>
 </template>
 
 <script>
 export default {
-    name: "LikedMensa"
+    name: "Dashboard"
 }
 </script>
 

@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div class="container-fluid">
         <nav-bar></nav-bar>
-        <b-button @click="getUser" variant="primary">get user</b-button>
+        <router-view></router-view>
+<!--        <b-button @click="getUser" variant="primary">get user</b-button>
         {{openMensa}}
-        <b-alert variant="success" v-if="user">{{user.name}}</b-alert>
+        <b-alert variant="success" v-if="user">{{user.name}}</b-alert>-->
     </div>
 </template>
 

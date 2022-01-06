@@ -41,7 +41,6 @@
 
 <script>
 import authService from "../service/authService";
-import router from "../route/router";
 export default {
     name: "LoginForm",
     data() {
@@ -53,13 +52,14 @@ export default {
         }
     },
     methods: {
-        login() {
-            authService.login(this.form).then(response => {
+        async login() {
+            await authService.login(this.form).then(response => {
                 localStorage.setItem('token', response.data.access_token)
-                this.$router.push({name: 'Home'})
+                this.$router.push({ path: 'dashboard' })
             }).catch(error => {
                 console.log(error)
             })
+
         },
     }
 }
