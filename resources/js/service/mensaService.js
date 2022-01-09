@@ -34,7 +34,10 @@ export default {
     getMeals(mensaId, date) {
         return apiOpenMensa.get(`/canteens/${mensaId}/days/${date}/meals`)
     },
-    async isMensaClosed(mensaId, date) {
+    isMensaClosed(mensaId, date) {
         return apiOpenMensa.get(`/canteens/${mensaId}/days/${date}`)
+    },
+    getMensa(mensaId) {
+        return apiOpenMensa.get(`/canteens/${mensaId}`)
     }
 };
