@@ -8,6 +8,7 @@ import Login from "../views/Login";
 import Mensas from "../views/Mensas";
 import Dashboard from "../views/Dashboard";
 import UserProfile from "../views/UserProfile";
+import MensaView from "../views/MensaView";
 
 const routes = [
     {
@@ -30,8 +31,14 @@ const routes = [
             },
             {
                 path: '/mensa',
-                name: 'Mensa',
+                name: 'Mensas',
                 component: Mensas
+            },
+            {
+                path: '/mensa/:mensaId',
+                name: 'MensaView',
+                component: MensaView,
+                props: true
             },
             {
                 path: '/userProfile',
@@ -40,6 +47,10 @@ const routes = [
             }
         ]
     },
+    {
+        path: '*',
+        redirect: '/dashboard'
+    }
 ]
 
 

@@ -27,5 +27,14 @@ export default {
         return apiMensa.post("/mensa/init", {
             openMensa: openMensa
         });
+    },
+    getMensas() {
+        return apiMensa.get("/mensa");
+    },
+    getMeals(mensaId, date) {
+        return apiOpenMensa.get(`/canteens/${mensaId}/days/${date}/meals`)
+    },
+    async isMensaClosed(mensaId, date) {
+        return apiOpenMensa.get(`/canteens/${mensaId}/days/${date}`)
     }
 };

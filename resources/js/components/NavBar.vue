@@ -6,7 +6,7 @@
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
-                <b-navbar-brand :to="{name: 'Mensa'}">Mensa</b-navbar-brand>
+                <b-navbar-brand :to="{name: 'Mensas'}">Mensa</b-navbar-brand>
                 <!-- Right aligned nav items -->
                 <b-navbar-nav class="ml-auto">
                     <b-nav-item-dropdown right>
