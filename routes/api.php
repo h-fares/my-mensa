@@ -26,6 +26,7 @@ Route::group(['middleware' => 'api'], function() {
 
 Route::group(['middleware'=>'api'], function() {
     Route::get('/user', [UserController::class, 'user']);
+    Route::get('/user/mensas', [UserController::class, 'mensas']);
 });
 
 Route::group(['middleware'=>'auth:api'], function() {

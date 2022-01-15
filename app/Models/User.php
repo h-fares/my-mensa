@@ -61,4 +61,13 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims() {
         return [];
     }
+
+    public function mensas(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(
+            Mensa::class,
+            'user_mensa',
+            'user_id',
+            'mensa_id');
+    }
 }

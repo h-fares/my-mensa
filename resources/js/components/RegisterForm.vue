@@ -81,7 +81,10 @@ export default {
     methods: {
         register() {
             authService.register(this.registerForm).then(response => {
-                router.push('/')
+                authService.login(this.registerForm).then(response => {
+                    localStorage.setItem('token', response.data.access_token)
+                    this.$router.push({ path: 'dashboard' })
+                })
             }).catch(error => {
                 console.log(error)
             })

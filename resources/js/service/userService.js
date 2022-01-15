@@ -13,5 +13,8 @@ const apiUser = axios.create({
 export default {
     getUser() {
         return apiUser.get("/user");
+    },
+    getUsersLikedMensa() {
+        return apiUser.get("/user/mensas");
     }
 };

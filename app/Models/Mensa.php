@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Mensa extends Model
 {
     use HasFactory;
+
+    public function users()
+    {
+        return $this->belongsToMany(
+            User::class,
+            'user_mensa',
+            'mensa_id',
+            'user_id');
+    }
 }

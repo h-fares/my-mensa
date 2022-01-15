@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mensa;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class MensaController extends Controller
@@ -30,4 +31,6 @@ class MensaController extends Controller
      public function getMensa($mensaId) {
          return Mensa::find($mensaId);
      }
+
+
 }
