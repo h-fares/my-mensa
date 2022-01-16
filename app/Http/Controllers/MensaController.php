@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Mensa;
 use App\Models\User;
+use App\Models\UserMensa;
 use Illuminate\Http\Request;
 
 class MensaController extends Controller
@@ -32,5 +33,13 @@ class MensaController extends Controller
          return Mensa::find($mensaId);
      }
 
+     public function setLikedMensa($mensaId) {
+        $userId = $user = auth()->user()->id;
+
+        UserMensa::insert([
+            'user_id' => $userId,
+            'mensa_id' => $mensaId
+        ]);
+     }
 
 }

@@ -39,5 +39,8 @@ export default {
     },
     getMensa(mensaId) {
         return apiOpenMensa.get(`/canteens/${mensaId}`)
+    },
+    setLikedMensa(mensaId) {
+        return apiMensa.post(`/mensa/${mensaId}/liked`)
     }
 };

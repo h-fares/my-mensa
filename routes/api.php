@@ -33,6 +33,7 @@ Route::group(['middleware'=>'auth:api'], function() {
     Route::post('/mensa/init', [MensaController::class, 'initMensas']);
     Route::get('/mensa', [MensaController::class, 'getAllMensa']);
     Route::get('/mensa/{mensaId}', [MensaController::class, 'getMensa']);
+    Route::post('/mensa/{mensaId}/liked', [MensaController::class, 'setLikedMensa']);
 });
 
 
