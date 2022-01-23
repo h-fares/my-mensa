@@ -1,23 +1,14 @@
 <template>
     <div>
-        <b-navbar toggleable="lg" type="dark" variant="secondary" class="container-fluid">
+        <b-navbar toggleable="lg" type="dark" variant="success" class="container-fluid nav-container">
             <b-navbar-brand :to="{name: 'Dashboard'}">Dashboard</b-navbar-brand>
 
             <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-brand :to="{name: 'Mensas'}">Mensa</b-navbar-brand>
-                <!-- Right aligned nav items -->
-                <b-navbar-nav class="ml-auto">
-                    <b-nav-item-dropdown right>
-                        <!-- Using 'button-content' slot -->
-                        <template #button-content>
-                            <em>User</em>
-                        </template>
-                        <b-dropdown-item :to="{name: 'UserProfile'}">Profile</b-dropdown-item>
-                        <b-dropdown-item @click="logout">Sign Out</b-dropdown-item>
-                    </b-nav-item-dropdown>
-                </b-navbar-nav>
+                <b-navbar-brand :to="{name: 'UserProfile'}">Profile</b-navbar-brand>
+                <b-navbar-brand  @click="logout" style="cursor: pointer">Ausloggen</b-navbar-brand>
             </b-collapse>
         </b-navbar>
     </div>
@@ -37,5 +28,8 @@ export default {
 </script>
 
 <style scoped>
-
+.nav-container {
+    background-color: rgb(88,131,109);
+    filter: grayscale(0.5) opacity(0.85)
+}
 </style>

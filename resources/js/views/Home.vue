@@ -1,5 +1,5 @@
 <template>
-    <div class="container-fluid">
+    <div class="">
         <nav-bar></nav-bar>
         <router-view></router-view>
 <!--        <b-button @click="getUser" variant="primary">get user</b-button>

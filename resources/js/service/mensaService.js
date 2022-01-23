@@ -42,5 +42,11 @@ export default {
     },
     setLikedMensa(mensaId) {
         return apiMensa.post(`/mensa/${mensaId}/liked`)
+    },
+    setNotLikedMensa(mensaId) {
+        return apiMensa.delete(`/mensa/${mensaId}/notLiked`)
+    },
+    getUserNotLikedMensas() {
+        return apiMensa.get("/mensa/notLiked");
     }
 };

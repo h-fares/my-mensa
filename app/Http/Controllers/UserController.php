@@ -17,7 +17,7 @@ class UserController extends Controller
     }
 
     public function mensas() {
-        $user = auth()->user();
-        return $user->mensas()->get();
+        #$user = auth()->user();
+        return auth()->user()->mensas()->get();
     }
 }

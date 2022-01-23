@@ -32,8 +32,11 @@ Route::group(['middleware'=>'api'], function() {
 Route::group(['middleware'=>'auth:api'], function() {
     Route::post('/mensa/init', [MensaController::class, 'initMensas']);
     Route::get('/mensa', [MensaController::class, 'getAllMensa']);
+    Route::get('/mensa/notLiked', [MensaController::class, 'getNotLikedMensa']);
     Route::get('/mensa/{mensaId}', [MensaController::class, 'getMensa']);
     Route::post('/mensa/{mensaId}/liked', [MensaController::class, 'setLikedMensa']);
+    Route::delete('/mensa/{mensaId}/notLiked', [MensaController::class, 'setNotLikedMensa']);
+
 });
 
 

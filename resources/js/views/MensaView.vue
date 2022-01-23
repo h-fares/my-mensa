@@ -1,12 +1,13 @@
 <template>
-    <div >
+    <div class="mensa-view-body">
+        <p>Speißenkarte für <strong>{{mensa.name}}</strong></p>
         <div v-if="isClosed">
             <b-alert variant="warning" class="mt-3">{{mensa.name}} ist heute geschlossen!!!</b-alert>
         </div>
         <div v-else>
             <b-row>
                 <b-col  v-for="meal in meals" :key="meal.id" class="col-4">
-                    <meal :meal="meal"></meal>
+                    <meal :meal="meal" :mensaName="mensa.name"></meal>
                 </b-col>
             </b-row>
         </div>
@@ -53,5 +54,12 @@ export default {
 </script>
 
 <style scoped>
+.mensa-view-body{
+    background-color: rgb(88,131,109);
 
+    font-size: 3vw;
+    font-weight: bold;
+    text-align: center;
+
+}
 </style>

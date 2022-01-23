@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Mensa;
-use App\Models\User;
 use App\Models\UserMensa;
 use Illuminate\Http\Request;
 
@@ -41,5 +40,20 @@ class MensaController extends Controller
             'mensa_id' => $mensaId
         ]);
      }
+
+     public function setNotLikedMensa($mensaId) {
+         $userId = $user = auth()->user()->id;
+
+         UserMensa::whereUserId($userId)->whereMensaId($mensaId)->delete();
+
+    }
+
+    public function getNotLikedMensa(): string {
+
+        $userId = $user = auth()->user()->id;
+        $userMensasId = UserMensa::whereUserId($userId)->pluck('mensa_id');
+
+        return Mensa::whereNotIn('id', $userMensasId)->get();
+    }
 
 }

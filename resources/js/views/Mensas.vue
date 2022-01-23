@@ -1,8 +1,9 @@
 <template>
-    <div class="container">
+    <div class="mensa-body">
+        <p>Alle Mensas</p>
         <b-row>
             <b-col  v-for="mensa in mensas" :key="mensa.id" class="col-4">
-                <mensa :mensa="mensa"></mensa>
+                <mensa :mensa="mensa" :is-liked="false"></mensa>
             </b-col>
         </b-row>
     </div>
@@ -22,7 +23,7 @@ export default {
         }
     },
     mounted() {
-        mensaService.getMensas().then(response => {
+        mensaService.getUserNotLikedMensas().then(response => {
             this.mensas = response.data
         })
     }
@@ -31,4 +32,12 @@ export default {
 
 <style scoped>
 
+.mensa-body{
+    background-color: rgb(88,131,109);
+
+    font-size: 3vw;
+    font-weight: bold;
+    text-align: center;
+
+}
 </style>

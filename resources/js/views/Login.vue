@@ -1,11 +1,6 @@
 <template>
-<!--    <div>
-        <login-form></login-form>
-
-    </div>-->
-
-    <div class="container-fluid col d-flex justify-content-center mt-3">
-        <b-tabs content-class="mt-3">
+    <div class="col d-flex justify-content-center login-body">
+        <b-tabs pills card content-class="mt-3">
             <b-tab title="Einloggen" active>
                 <login-form></login-form>
             </b-tab>
@@ -25,5 +20,12 @@ export default {
 </script>
 
 <style scoped>
+.login-body{
+    background-color: rgb(88,131,109);
+
+    font-size: .9vw;
+    font-weight: bold;
+    text-align: center;
+}
 
 </style>
