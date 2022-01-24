@@ -9,6 +9,7 @@ import Mensas from "../views/Mensas";
 import Dashboard from "../views/Dashboard";
 import UserProfile from "../views/UserProfile";
 import MensaView from "../views/MensaView";
+import MensaNearMe from "../views/MensaNearMe";
 
 const routes = [
     {
@@ -33,6 +34,11 @@ const routes = [
                 path: '/mensa',
                 name: 'Mensas',
                 component: Mensas
+            },
+            {
+                path: '/mensa-near-me',
+                name: 'MensasNearMe',
+                component: MensaNearMe
             },
             {
                 path: '/mensa/:mensaId',

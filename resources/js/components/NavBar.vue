@@ -7,6 +7,7 @@
 
             <b-collapse id="nav-collapse" is-nav>
                 <b-navbar-brand :to="{name: 'Mensas'}">Mensa</b-navbar-brand>
+                <b-navbar-brand :to="{name: 'MensasNearMe'}">Mensa neben Dir</b-navbar-brand>
                 <b-navbar-brand :to="{name: 'UserProfile'}">Profile</b-navbar-brand>
                 <b-navbar-brand  @click="logout" style="cursor: pointer">Ausloggen</b-navbar-brand>
             </b-collapse>

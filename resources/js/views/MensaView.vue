@@ -1,8 +1,19 @@
 <template>
     <div class="mensa-view-body">
         <p>Speißenkarte für <strong>{{mensa.name}}</strong></p>
+        <b-row class="justify-content-md-center">
+            <b-col class="col-3">
+                <label for="mensa-datum" style="font-size: 1vw">Geben Sie Datum ein!</label>
+                <b-form-datepicker id="mensa-datum" v-model="date" class="mb-2"></b-form-datepicker>
+            </b-col>
+        </b-row>
+        <b-row class="justify-content-md-center">
+            <b-col class="col-3">
+                <b-button variant="success" @click="getMeals">Ok</b-button>
+            </b-col>
+        </b-row>
         <div v-if="isClosed">
-            <b-alert variant="warning" class="mt-3">{{mensa.name}} ist heute geschlossen!!!</b-alert>
+            <b-alert variant="warning" class="mt-3" show>{{mensa.name}} ist heute geschlossen!!!</b-alert>
         </div>
         <div v-else>
             <b-row>
@@ -28,27 +39,35 @@ export default {
         return {
             meals: [],
             isClosed: false,
-            mensa: ''
+            mensa: '',
+            date: ''
         }
     },
      mounted() {
-        let date = format(new Date(), 'yyyy-MM-dd')
 
-         mensaService.getMeals(30, '2022-01-05').then(response => {
-             this.meals = response.data
-         }).catch(error => {
-             console.log(error)
-         })
+         //const latitude  = position.coords.latitude;
+        this.date = format(new Date(), 'yyyy-MM-dd')
+        this.getMeals()
 
-         mensaService.isMensaClosed(30, '2022-01-05').then(response => {
-             this.isClosed = response.data.closed
-         }).catch(error => {
-             console.log(error)
-         })
+    },
+    methods: {
+        getMeals() {
+            mensaService.getMeals(this.mensaId, this.date).then(response => {
+                this.meals = response.data
+            }).catch(error => {
+                console.log(error)
+            })
 
-         mensaService.getMensa(this.mensaId).then(response => {
-             this.mensa = response.data
-         })
+            mensaService.isMensaClosed(this.mensaId, this.date).then(response => {
+                this.isClosed = response.data.closed
+            }).catch(error => {
+                console.log(error)
+            })
+
+            mensaService.getMensa(this.mensaId).then(response => {
+                this.mensa = response.data
+            })
+        }
     }
 }
 </script>

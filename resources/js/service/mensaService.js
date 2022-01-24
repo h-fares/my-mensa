@@ -48,5 +48,8 @@ export default {
     },
     getUserNotLikedMensas() {
         return apiMensa.get("/mensa/notLiked");
+    },
+    getMensaNearby(lat, lng, dist) {
+        return apiOpenMensa.get(`/canteens/?near[lat]=${lat}&near[lng]=${lng}&near[dist]=${dist}`)
     }
 };

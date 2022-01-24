@@ -1,12 +1,12 @@
 <template>
-    <div class="mensa-body">
+    <b-row class="mensa-body">
         <p>Alle Mensas</p>
         <b-row>
             <b-col  v-for="mensa in mensas" :key="mensa.id" class="col-4">
                 <mensa :mensa="mensa" :is-liked="false"></mensa>
             </b-col>
         </b-row>
-    </div>
+    </b-row>
 </template>
 
 <script>
@@ -19,10 +19,12 @@ export default {
     },
     data() {
         return {
-            mensas: []
+            mensas: [],
+            date: ''
         }
     },
     mounted() {
+        this.date = new Date()
         mensaService.getUserNotLikedMensas().then(response => {
             this.mensas = response.data
         })
