@@ -3,18 +3,18 @@
             <b-card
                 :title="mensa.name"
                 tag="article"
-                style="max-width: 20rem; height: 200px; font-size: .4vw;"
+                style="width: 100%; height: 200px; font-size: .1em;"
 
                 class="mb-2"
             >
-                <b-card-text style="font-size: .7vw;">
+                <b-card-text style="font-size:1.5rem;">
                     <strong>Stadt: </strong>
                     {{mensa.city}}
                 </b-card-text>
 
                 <router-link :to="{name: 'MensaView', params: {mensaId: mensa.open_mensa_id}}" class="btn btn-dark">Auswählen</router-link>
                 <b-button variant="success" @click="manageLikedMensa">
-                    <b-badge variant="light"><b-icon :icon="likeIcon" scale="1"></b-icon></b-badge>
+                    <b-badge variant="light"><b-icon :icon="likeIcon"></b-icon></b-badge>
                 </b-button>
             </b-card>
     </div>

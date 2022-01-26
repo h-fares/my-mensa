@@ -11,6 +11,7 @@
         >
             <b-form >
                 <b-form-group
+                    style="font-size: 1rem"
                     id="name"
                     label="Name: "
                     label-for="name"
@@ -25,6 +26,7 @@
                     ></b-form-input>
                 </b-form-group>
                 <b-form-group
+                    style="font-size: 1rem"
                     id="email"
                     label="Email Adresse:"
                     label-for="email"
@@ -39,21 +41,13 @@
                     ></b-form-input>
                 </b-form-group>
 
-                <b-form-group id="password" label="Passwort:" label-for="password">
+                <b-form-group style="font-size: 1rem" id="password" label="Passwort:" label-for="password">
                     <b-form-input
                         id="password"
                         v-model="registerForm.password"
                         placeholder="Password eingeben!"
                         required
                         type="password"
-                    ></b-form-input>
-                    <b-form-input
-                        id="passwordConf"
-                        v-model="registerForm.passwordConfirmation"
-                        placeholder="Passwort wiederholen!"
-                        required
-                        type="password"
-                        class="mt-2"
                     ></b-form-input>
                 </b-form-group>
             </b-form>
@@ -86,7 +80,12 @@ export default {
                     this.$router.push({ path: 'dashboard' })
                 })
             }).catch(error => {
-                console.log(error)
+                if(error.response.status === 401) {
+                    localStorage.removeItem('token')
+                    this.$router.push({name: 'Login'})
+                } else {
+                    this.$bvModal.msgBoxOk('Error! Bitte versuchen Sie nochmal!')
+                }
             })
         }
     }

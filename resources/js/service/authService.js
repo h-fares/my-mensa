@@ -10,12 +10,26 @@ const apiAuth = axios.create({
 
 
 export default {
+    /**
+     *
+     * @param body
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     login(body) {
         return apiAuth.post("/login", body);
     },
+    /**
+     *
+     * @param body
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     register(body) {
         return apiAuth.post("/register", body);
     },
+    /**
+     *
+     * @returns {Promise<void>}
+     */
     async logout() {
         await apiAuth.post("/logout", null, {
             headers: {

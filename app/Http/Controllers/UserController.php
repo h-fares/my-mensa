@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+
 use Illuminate\Http\JsonResponse;
 
 class UserController extends Controller
@@ -16,8 +16,11 @@ class UserController extends Controller
         return response()->json(auth()->user());
     }
 
+    /**
+     * Get all liked mensa for one user
+     * @return mixed
+     */
     public function mensas() {
-        #$user = auth()->user();
         return auth()->user()->mensas()->get();
     }
 }

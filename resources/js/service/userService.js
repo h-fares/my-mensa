@@ -11,9 +11,17 @@ const apiUser = axios.create({
 });
 
 export default {
+    /**
+     * Get user
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     getUser() {
         return apiUser.get("/user");
     },
+    /**
+     * Get all user's liked mensas
+     * @returns {Promise<AxiosResponse<any>>}
+     */
     getUsersLikedMensa() {
         return apiUser.get("/user/mensas");
     }

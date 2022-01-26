@@ -1,15 +1,19 @@
 <template>
-    <div >
-        <div class="dashboard-body">
-            <p>Willkommen bei Deiner "MY MENSA" APP</p>
-            <p>Deine lieblinges Mensas</p>
+    <div class="dashboard-body">
+        <div v-if="!error">
+            <p style="font-size: 2rem">Willkommen bei Deiner "MY MENSA" APP</p>
+            <p style="font-size: 1.5rem">Deine lieblinges Mensas</p>
             <b-row class="liked-mensas">
-                <b-col  v-for="mensa in likedMensas" :key="mensa.id" class="col-4">
+                <b-col  v-for="mensa in likedMensas" :key="mensa.id" class="col-sm-13 col-lg-4">
                     <mensa :mensa="mensa" :is-liked=true ></mensa>
                 </b-col>
             </b-row>
         </div>
-
+        <b-row v-else>
+            <b-col>
+                <b-alert show variant="danger" style="font-size: .5em">Keine lieblings Mensas!</b-alert>
+            </b-col>
+        </b-row>
     </div>
 </template>
 
@@ -23,16 +27,17 @@ export default {
     },
     data() {
         return {
-            likedMensas: []
+            likedMensas: [],
+            error: false
         }
     },
     created() {
         userService.getUsersLikedMensa().then(response => {
-            this.likedMensas = response.data
+            if(!response.data.length) this.error = true
+            else this.likedMensas = response.data
         }).catch(error => {
             window.location.reload()
         })
-
     }
 }
 </script>

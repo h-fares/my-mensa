@@ -36,7 +36,7 @@ Route::group(['middleware'=>'auth:api'], function() {
     Route::get('/mensa/{mensaId}', [MensaController::class, 'getMensa']);
     Route::post('/mensa/{mensaId}/liked', [MensaController::class, 'setLikedMensa']);
     Route::delete('/mensa/{mensaId}/notLiked', [MensaController::class, 'setNotLikedMensa']);
-
+    Route::get('/mensa/nearMe/{lat}/{lng}/{dist}', [MensaController::class, 'getMensaNearMe']);
 });
 
 

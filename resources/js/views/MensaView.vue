@@ -1,27 +1,34 @@
 <template>
     <div class="mensa-view-body">
-        <p>Speißenkarte für <strong>{{mensa.name}}</strong></p>
-        <b-row class="justify-content-md-center">
-            <b-col class="col-3">
-                <label for="mensa-datum" style="font-size: 1vw">Geben Sie Datum ein!</label>
-                <b-form-datepicker id="mensa-datum" v-model="date" class="mb-2"></b-form-datepicker>
-            </b-col>
-        </b-row>
-        <b-row class="justify-content-md-center">
-            <b-col class="col-3">
-                <b-button variant="success" @click="getMeals">Ok</b-button>
-            </b-col>
-        </b-row>
-        <div v-if="isClosed">
-            <b-alert variant="warning" class="mt-3" show>{{mensa.name}} ist heute geschlossen!!!</b-alert>
-        </div>
-        <div v-else>
-            <b-row>
-                <b-col  v-for="meal in meals" :key="meal.id" class="col-4">
-                    <meal :meal="meal" :mensaName="mensa.name"></meal>
+        <div v-if="!error">
+            <p style="font-size: 2rem">Speißenkarte für <strong>{{mensa.name}}</strong></p>
+            <b-row class="justify-content-md-center">
+                <b-col class="col-sm-12 col-lg-3">
+                    <label for="mensa-datum" style="font-size: 1rem">Geben Sie Datum ein!</label>
+                    <b-form-datepicker id="mensa-datum" v-model="date" class="mb-2"></b-form-datepicker>
                 </b-col>
             </b-row>
+            <b-row class="justify-content-md-center">
+                <b-col class="col-3">
+                    <b-button variant="success" @click="getMeals">Ok</b-button>
+                </b-col>
+            </b-row>
+            <div v-if="isClosed">
+                <b-alert variant="warning" class="mt-3" show>{{mensa.name}} ist heute geschlossen!!!</b-alert>
+            </div>
+            <div v-else>
+                <b-row>
+                    <b-col  v-for="meal in meals" :key="meal.id"  class="col-sm-12 col-lg-4">
+                        <meal :meal="meal" :mensaName="mensa.name"></meal>
+                    </b-col>
+                </b-row>
+            </div>
         </div>
+        <b-row v-else>
+            <b-col>
+                <b-alert show variant="danger" style="font-size: .5em">Keine Mensas! Bitte versuchen Sie nochmal</b-alert>
+            </b-col>
+        </b-row>
     </div>
 </template>
 
@@ -40,7 +47,8 @@ export default {
             meals: [],
             isClosed: false,
             mensa: '',
-            date: ''
+            date: '',
+            error: false
         }
     },
      mounted() {
@@ -55,17 +63,34 @@ export default {
             mensaService.getMeals(this.mensaId, this.date).then(response => {
                 this.meals = response.data
             }).catch(error => {
-                console.log(error)
+                if(error.response.status === 401) {
+                    localStorage.removeItem('token')
+                    this.$router.push({name: 'Login'})
+                } else {
+                    this.$bvModal.msgBoxOk('Fehler von Mensa Open API! Bitte versuchen Sie nochmal')
+                }
             })
 
             mensaService.isMensaClosed(this.mensaId, this.date).then(response => {
                 this.isClosed = response.data.closed
             }).catch(error => {
-                console.log(error)
+                if(error.response.status === 401) {
+                    localStorage.removeItem('token')
+                    this.$router.push({name: 'Login'})
+                } else {
+                    this.$bvModal.msgBoxOk('Fehler von Mensa Open API! Bitte versuchen Sie nochmal')
+                }
             })
 
             mensaService.getMensa(this.mensaId).then(response => {
                 this.mensa = response.data
+            }).catch(error => {
+                if(error.response.status === 401) {
+                    localStorage.removeItem('token')
+                    this.$router.push({name: 'Login'})
+                } else {
+                    this.$bvModal.msgBoxOk('Fehler von Mensa Open API! Bitte versuchen Sie nochmal')
+                }
             })
         }
     }

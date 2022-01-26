@@ -1,20 +1,27 @@
 <template>
     <b-row class="mensa-near-me-body">
-        <p>Alle Mensas neben Dir!</p>
+        <p style="font-size: 2rem">Alle Mensas neben Dir!</p>
         <b-row class="justify-content-md-center">
-            <b-col class="col-3">
-                <label for="demo-sb" style="font-size: 1vw">Distanz</label>
+            <b-col class="col-sm-13 col-lg-3">
+                <label for="demo-sb" style="font-size: 1.5rem">Distanz</label>
                 <b-form-spinbutton id="demo-sb" v-model="dist" min="1" max="100"></b-form-spinbutton>
             </b-col>
         </b-row>
         <b-row class="justify-content-md-center">
-            <b-col class="col-3">
+            <b-col class="col-sm-13 col-lg-3 mt-4">
                 <b-button variant="success" @click="getMensaNearMe">Ok</b-button>
             </b-col>
         </b-row>
-        <b-row>
-            <b-col  v-for="mensa in mensaNearMe" :key="mensa.id" class="col-4">
-                <mensa :mensa="mensa" :is-liked="false"></mensa>
+        <div v-if="mensaNearMe.length !== 0">
+            <b-row>
+                <b-col  v-for="mensa in mensaNearMe" :key="mensa.id" class="col-sm-13 col-lg-4">
+                    <mensa :mensa="mensa[0]" :is-liked="false"></mensa>
+                </b-col>
+            </b-row>
+        </div>
+        <b-row v-else>
+            <b-col>
+                <b-alert show variant="danger" style="font-size: .5em">Keine Mensas neben Dir!</b-alert>
             </b-col>
         </b-row>
     </b-row>
@@ -37,18 +44,36 @@ export default {
         }
     },
     mounted() {
-        navigator.geolocation.getCurrentPosition((position) => {
+         navigator.geolocation.getCurrentPosition((position) => {
             this.lat = position.coords.latitude
             this.lng = position.coords.longitude
+             this.getMensaNearMe()
         });
-        this.getMensaNearMe()
     },
     methods: {
         getMensaNearMe() {
             mensaService.getMensaNearby(this.lat, this.lng, this.dist).then(response => {
-                this.mensaNearMe = response.data
+                const mensaNearMeOpenApi = response.data
+                mensaService.getMensas().then(response => {
+                    const mensas = response.data
+                    mensaNearMeOpenApi.forEach(mensa => {
+                        this.mensaNearMe.push(mensas.filter(element => element.open_mensa_id === mensa.id ))
+                    })
+                }).catch(error => {
+                    if(error.response.status === 401) {
+                        localStorage.removeItem('token')
+                        this.$router.push({name: 'Login'})
+                    } else {
+                        this.$bvModal.msgBoxOk('Error! Bitte versuchen Sie nochmal!')
+                    }
+                })
             }).catch(error => {
-                console.log(error)
+                if(error.response.status === 401) {
+                    localStorage.removeItem('token')
+                    this.$router.push({name: 'Login'})
+                } else {
+                    this.$bvModal.msgBoxOk('Error! Bitte versuchen Sie nochmal!')
+                }
             })
         }
     }

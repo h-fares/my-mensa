@@ -1,6 +1,6 @@
 <template>
     <div class="col d-flex justify-content-center login-body">
-        <b-tabs pills card content-class="mt-3">
+        <b-tabs style="font-size: 1rem" pills card content-class="mt-3">
             <b-tab title="Einloggen" active>
                 <login-form></login-form>
             </b-tab>

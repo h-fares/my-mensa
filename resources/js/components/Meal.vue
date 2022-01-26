@@ -3,11 +3,11 @@
         <b-card
             :title="meal.name"
             tag="article"
-            style="max-width: 20rem; height: 400px; font-size: .7vw; font-weight: bold;"
+            style="width: 100%; height: 400px; font-size: .7em; font-weight: bold;"
 
             class="mb-2"
         >
-            <b-card-text  style="font-size: 1vw;">
+            <b-card-text  style="font-size: 2rem;">
                 <h4>Preise: </h4>
                 <strong>Student:</strong> {{meal.prices.students}} €
                 <br>

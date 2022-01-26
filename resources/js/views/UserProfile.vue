@@ -1,15 +1,7 @@
 <template>
     <div class="user">
-        <b-card
-            :title="user.name"
-            tag="article"
-            style="max-width: 20rem; height: 200px; font-size: .4vw;"
-
-            class="mb-2"
-        >
-            <b-card-text style="font-size: .7vw;">
-            </b-card-text>
-        </b-card>
+        <h3>Hallo {{user.name}}</h3>
+        <h3>Email: {{user.email}}</h3>
     </div>
 </template>
 
@@ -25,6 +17,13 @@ export default {
     mounted() {
         userService.getUser().then(response => {
             this.user = response.data
+        }).catch(error => {
+            if(error.response.status === 401) {
+                localStorage.removeItem('token')
+                this.$router.push({name: 'Login'})
+            } else {
+                this.$bvModal.msgBoxOk('Fehler! Bitte versuchen Sie nochmal')
+            }
         })
     }
 }
